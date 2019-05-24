@@ -1,9 +1,7 @@
 package com.paranoia.provider;
 
+import com.paranoia.hello.HelloService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -13,13 +11,17 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @RestController
-public class ServiceController {
+public class ServiceController implements HelloService {
 
 
-    @RequestMapping(value = "/service/{string}", method = RequestMethod.GET)
-    public String echo(@PathVariable String string) {
-        log.info("server client get request msg :" + string);
-        return "server callback : " + string;
+    @Override
+    public String echo(String name) {
+        log.info("server client get request msg :" + name);
+        return "server callback : " + name;
     }
 
+//    @Override
+//    public Mono<String> getMonoString() {
+//        return Mono.just("service client mono str : i am Iron Man");
+//    }
 }
